@@ -19,10 +19,10 @@ public class Hud implements Disposable {
 
     private Integer worldTimer;
     private float timeCount;
-    private Integer lvl;
+    public static int lvl;
 
-    Label countdownLabel;
-    Label lvlLabel;
+    private Label countdownLabel;
+    public Label lvlLabel;
     //Label timeLabel;
     Label levelLabel;
     Label worldLabel;

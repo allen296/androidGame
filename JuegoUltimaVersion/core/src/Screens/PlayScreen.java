@@ -90,8 +90,12 @@ public class PlayScreen implements Screen {
     }
 
     public void handleInput(float dt){
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
+            hud.lvl=hud.lvl+1;
+            hud.lvlLabel.setText("NIVEL: "+hud.lvl);
+
+        }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
             player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
@@ -131,8 +135,8 @@ public class PlayScreen implements Screen {
 //        game.batch.end();
 
 
-//        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-//        hud.stage.draw();
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
     }
 
     @Override

@@ -25,6 +25,12 @@ public class launcher extends Activity {
         this.startActivity(lanzar);
 
     }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Intent miIntent=new Intent(this, Servicio.class);
+        this.startService(miIntent);
+    }
         @Override
         public void onBackPressed() {
             AlertDialog.Builder db = new AlertDialog.Builder(this);

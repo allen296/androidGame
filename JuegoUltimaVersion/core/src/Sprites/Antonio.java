@@ -20,10 +20,9 @@ public class Antonio extends Actor {
     private TextureRegion marioStand;
 
 
-    public Antonio(World world, PlayScreen screen, Sprite sprite){
+    public Antonio(World world, PlayScreen screen){
         this.world=world;
         defineAntonio();
-        sprite= new Sprite
 
     }
 

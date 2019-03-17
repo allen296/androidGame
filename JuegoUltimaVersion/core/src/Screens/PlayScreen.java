@@ -131,8 +131,8 @@ public class PlayScreen implements Screen {
 //        game.batch.end();
 
 
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
+//        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+//        hud.stage.draw();
     }
 
     @Override

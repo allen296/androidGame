@@ -6,6 +6,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -30,7 +32,9 @@ import Tools.B2WorldCreator;
 
 public class PlayScreen implements Screen {
 
+
     private Lol game;
+    private TextureAtlas atlas;
     private Hud hud;
     private Antonio player;
 
@@ -50,6 +54,7 @@ public class PlayScreen implements Screen {
 
 
     public PlayScreen (Lol game){
+        atlas = new TextureAtlas("maps/mariogoomba.pack");
         this.game=game;
         b2dr=new Box2DDebugRenderer();
 
@@ -73,7 +78,10 @@ public class PlayScreen implements Screen {
 
         new B2WorldCreator(world,map);
 
-        player = new Antonio(world);
+        player = new Antonio(world, this);
+    }
+    public TextureAtlas getAtlas(){
+        return atlas;
     }
 
     @Override
@@ -97,6 +105,8 @@ public class PlayScreen implements Screen {
 
         gameCamera.position.x=player.b2body.getPosition().x;
 
+
+        gameCamera.position.x=player.b2body.getPosition().x;
         gameCamera.update();;
     }
 
@@ -114,6 +124,12 @@ public class PlayScreen implements Screen {
         //renderiza las fisicas
 
         b2dr.render(world,gameCamera.combined);
+
+//        game.batch.setProjectionMatrix(gameCamera.combined);
+//        game.batch.begin();
+//        player.draw(game.batch);
+//        game.batch.end();
+
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();

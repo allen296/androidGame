@@ -16,6 +16,11 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import Screens.PlayScreen;
 
+/**
+ * @author Antonio Valladares García
+ *
+ * Clase que lanza las distintas (por ahora no) pantallas del juego
+ */
 public class Lol extends com.badlogic.gdx.Game {
 
 	public static final int V_WIDTH=400;

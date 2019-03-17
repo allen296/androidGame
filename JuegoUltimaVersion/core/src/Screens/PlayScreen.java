@@ -30,6 +30,11 @@ import Scenes.Hud;
 import Sprites.Antonio;
 import Tools.B2WorldCreator;
 
+/**
+ * @author Antonio Valladares García
+ *
+ * Clase principal en la que se reunen las demas clases para (hud, personaje, etc)
+ */
 public class PlayScreen implements Screen {
 
 
@@ -52,13 +57,15 @@ public class PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer b2dr;
 
-
+    /**
+     * @author Antonio Valladares García
+     * Constructor de la clase
+     * @param game
+     */
     public PlayScreen (Lol game){
-        atlas = new TextureAtlas("maps/mariogoomba.pack");
+        //atlas = new TextureAtlas("maps/mariogoomba.pack");
         this.game=game;
         b2dr=new Box2DDebugRenderer();
-
-
         gameCamera= new OrthographicCamera();
 
         //Hace que el aspecto sea mas o menos generico independientemente de la pantalla
@@ -69,17 +76,25 @@ public class PlayScreen implements Screen {
 
 
         maploader= new TmxMapLoader();
+        //Coge el mapa de la carpeta de assets
         map = new TmxMapLoader().load("maps/mapa1.tmx");
         renderer=new OrthogonalTiledMapRenderer(map,1/Lol.PPM);
 
         gameCamera.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/2,0);
 
+        //Añade gravedad al mundo
         world=new World(new Vector2(0,-7f),true);
 
+        //Añade las capas de colision al mapa y el mapa al mundo
         new B2WorldCreator(world,map);
 
         player = new Antonio(world, this);
     }
+
+    /**
+     * Working progress class
+     * @return
+     */
     public TextureAtlas getAtlas(){
         return atlas;
     }
@@ -89,6 +104,13 @@ public class PlayScreen implements Screen {
 
     }
 
+    /**
+     * @author Antonio Valladares García
+     *
+     * @param dt
+     * Clase que controla el movimiento a traves de las flechas de direccion. asi como la suma de nivel al
+     * saltar para probar el guardado de datos
+     */
     public void handleInput(float dt){
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             player.b2body.applyLinearImpulse(new Vector2(0, 3f), player.b2body.getWorldCenter(), true);
@@ -102,6 +124,12 @@ public class PlayScreen implements Screen {
             player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
     }
 
+    /**
+     * @author Antonio Valladares García
+     *
+     * @param dt
+     * Clase que actualiza la posicion de la camara, asi como de los elementos del mundo
+     */
     public void update(float dt){
         handleInput(dt);
 
@@ -109,13 +137,17 @@ public class PlayScreen implements Screen {
 
         gameCamera.position.x=player.b2body.getPosition().x;
 
-
         gameCamera.position.x=player.b2body.getPosition().x;
         gameCamera.update();;
     }
 
+    /**
+     * @author Antonio Valladares García
+     * renderiza la camara, el fondo de pantalla y los elementos como el hud, world, etc
+     * @param delta
+     */
     @Override
-    public void render(float delta) {
+        public void render(float delta) {
 
         update(delta);
         renderer.setView(gameCamera);
@@ -139,6 +171,14 @@ public class PlayScreen implements Screen {
         hud.stage.draw();
     }
 
+
+    /**
+     * @author Antonio Valladares García
+     *
+     * Redimensiona la pantalla en caso de ser necesario
+     * @param width
+     * @param height
+     */
     @Override
     public void resize(int width, int height) {
 
@@ -161,6 +201,9 @@ public class PlayScreen implements Screen {
 
     }
 
+    /**
+     * Metodo autogenerado para hacer dispose y evitar consumo excesivo de recursos
+     */
     @Override
     public void dispose() {
         map.dispose();

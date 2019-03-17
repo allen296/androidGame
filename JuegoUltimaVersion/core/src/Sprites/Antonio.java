@@ -13,6 +13,11 @@ import com.mygdx.game.Lol;
 
 import Screens.PlayScreen;
 
+/**
+ * @author Antonio Valladares García
+ *
+ * Clase que crea al jugador
+ */
 public class Antonio extends Actor {
     private Sprite sprite;
     public World world;
@@ -20,6 +25,11 @@ public class Antonio extends Actor {
     private TextureRegion marioStand;
 
 
+    /**
+     * Constructor del jugador
+     * @param world
+     * @param screen
+     */
     public Antonio(World world, PlayScreen screen){
         this.world=world;
         defineAntonio();
@@ -29,7 +39,9 @@ public class Antonio extends Actor {
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
     }
-
+/**
+ * Metodo para añadir definicion al cuerpo del personaje
+ */
     public void defineAntonio(){
         BodyDef bdef= new BodyDef();
         bdef.position.set(60/Lol.PPM,130/Lol.PPM);

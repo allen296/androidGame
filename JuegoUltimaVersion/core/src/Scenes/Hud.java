@@ -12,8 +12,15 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Lol;
 
 
-
+/**
+ * @author Antonio Valladares García
+ * Clase para el hud que va a representarse en PlayScreen
+ */
 public class Hud implements Disposable {
+
+    /**
+     * Atributos
+     */
     public Stage stage;
     private Viewport viewport;
 
@@ -28,11 +35,15 @@ public class Hud implements Disposable {
     Label worldLabel;
     Label antonioLabel;
 
+    /**
+     * Constructor
+     * @param sb
+     */
     public Hud (SpriteBatch sb){
         //worldTimer=200;
         timeCount=0;
         lvl =1;
-
+        //FitPort para que se adapte a las pantallas para
         viewport=new FitViewport(Lol.V_WIDTH,Lol.V_HEIGHT,new OrthographicCamera());
         stage =new Stage(viewport,sb);
 
@@ -40,19 +51,18 @@ public class Hud implements Disposable {
         table.top();
         table.setFillParent(true);
 
-        //countdownLabel=new Label(String.format("%03d",worldTimer),new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
+
         lvlLabel =new Label("NIVEL "+lvl,new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
-        //timeLabel=new Label("TIEMPO",new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
+
         levelLabel=new Label("ALDEA",new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
-        //worldLabel=new Label( "RUNATERRA",new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
+
         antonioLabel=new Label("ANTONIO",new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
 
 
         //colocamos en las posiciones los distintos labels
         table.add(antonioLabel).expandX().padTop(10);
         table.add(levelLabel).expandX();
-        //table.add(worldLabel).expandX().padTop(10);
-        //table.add(timeLabel).expandX().padTop(10);
+
         table.row();
         table.add(lvlLabel).expandX();
         table.add(countdownLabel).expandX();
@@ -61,6 +71,9 @@ public class Hud implements Disposable {
 
     }
 
+    /**
+     * Para poder hacer dispose en la clase principal
+     */
     @Override
     public void dispose() {
         stage.dispose();
